@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+/**
+ * @author Bogdan Benga <bogdanbenga@gmail.com></>
+ */
 @SpringBootApplication
 public class SpringPostgresDockerApplication {
 
