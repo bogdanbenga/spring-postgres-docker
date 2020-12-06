@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
  */
 @Repository
-public interface CustomerOrderRepository extends JpaRepository<CustomerOrder,Integer> {
+public interface CustomerOrderRepository extends JpaRepository<CustomerOrder,Long> {
 }

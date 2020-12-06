@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
@@ -19,7 +20,7 @@ public class CustomerOrder {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String email;
@@ -27,5 +28,8 @@ public class CustomerOrder {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date placedTime;
+
+    @ManyToMany(mappedBy = "orders")
+    private Set<Product> products;
 
 }

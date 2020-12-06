@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
@@ -18,7 +19,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -29,5 +30,11 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date created;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "product_order",
+            joinColumns = { @JoinColumn(name = "product_id",nullable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "order_id", nullable = false) })
+    private Set<CustomerOrder> orders;
 
 }
