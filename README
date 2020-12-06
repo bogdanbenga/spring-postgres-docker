@@ -1,0 +1,13 @@
+The application provides a basic implementation of CRUD services for Product and Order management
+
+Prerequisites:
+ - Apache Maven 3.6.3 or later needs to be installed on the local machine
+ - The latest version of Docker Desktop needs to be installed on the local machine
+
+How to install and run:
+ 1. from cmd(windows)/terminal(unix based os), cd to the root of the project and run a maven build with the following command:
+    mvn clean package -DskipTests
+ 2. from cmd(windows)/terminal(unix based os), cd to the root of the project and run docker compose by the following command:
+    docker-compose up
+ 3. Once the docker images are downloaded and/or created and the containers are running, the application is ready to be used
+ 4. In order to use the application see the swagger api doc of the project
