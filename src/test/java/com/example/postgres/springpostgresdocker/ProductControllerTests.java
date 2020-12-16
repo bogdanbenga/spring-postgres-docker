@@ -52,7 +52,7 @@ public class ProductControllerTests extends ProductControllerTestHelper {
 
         //Update product
         productDto.setPrice(new BigDecimal("12.12"));
-        ResponseEntity<ProductDto> updateResult = updateProduct(productDto);
+        ResponseEntity<String> updateResult = updateProduct(productDto);
         Assertions.assertEquals(200, updateResult.getStatusCodeValue());
 
         //Delete product

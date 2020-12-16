@@ -60,7 +60,7 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
         TOKEN = result.getBody();
     }
 
-    ResponseEntity<ProductDto> updateProduct(ProductDto productDto) {
+    ResponseEntity<String> updateProduct(ProductDto productDto) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");
@@ -68,7 +68,7 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
         headers.add("Authorization", AUTH_PREFIX + " " + TOKEN);
 
         HttpEntity<ProductDto> entity = new HttpEntity<>(productDto, headers);
-        return restTemplate.exchange(PRODUCTS_URL, HttpMethod.PUT, entity, ProductDto.class);
+        return restTemplate.exchange(PRODUCTS_URL, HttpMethod.PUT, entity, String.class);
     }
 
     ResponseEntity<String> createProduct(ProductDto productDto) throws URISyntaxException {

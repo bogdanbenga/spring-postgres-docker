@@ -1,12 +1,14 @@
 package com.example.postgres.springpostgresdocker.service;
 
 import com.example.postgres.springpostgresdocker.dto.ProductDto;
+import com.example.postgres.springpostgresdocker.exception.ResourceNotFoundException;
 import com.example.postgres.springpostgresdocker.model.Product;
 import com.example.postgres.springpostgresdocker.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.management.relation.RelationServiceNotRegisteredException;
 import java.lang.reflect.Type;
@@ -45,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(ProductDto productDto) throws RelationServiceNotRegisteredException {
+    public ProductDto update(ProductDto productDto) throws ResourceNotFoundException {
 
         Optional<Product> product = productRepository.findByName(productDto.getName());
         if (product.isPresent()) {
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
             productToUpdate.setPrice(productDto.getPrice());
             productRepository.save(productToUpdate);
         } else {
-            throw new RelationServiceNotRegisteredException("Update failed! The product with name: "
+            throw new ResourceNotFoundException("Update failed! The product with name: "
                     + productDto.getName()
                     + "does not exist.");
         }
@@ -63,7 +65,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(String name) throws RelationServiceNotRegisteredException {
-        productRepository.delete(productRepository.findByName(name).get());
+    @Transactional
+    public void delete(String name) throws ResourceNotFoundException {
+        Long deletedItems = productRepository.deleteByName(name);
+        if (deletedItems ==0){
+            throw new ResourceNotFoundException("Delete failed! The product with name: "
+                    + name
+                    + "does not exist.");
+        }
     }
 }

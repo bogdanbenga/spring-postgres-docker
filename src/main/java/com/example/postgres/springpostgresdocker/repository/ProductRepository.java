@@ -11,6 +11,8 @@ import java.util.Optional;
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findByName(String name);
+
+    Long deleteByName(String name);
 }
