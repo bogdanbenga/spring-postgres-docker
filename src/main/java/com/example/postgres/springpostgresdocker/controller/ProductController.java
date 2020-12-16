@@ -15,6 +15,7 @@ import java.util.Set;
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
  */
 @RestController
+@RequestMapping("products")
 public class ProductController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
@@ -22,25 +23,25 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @GetMapping
     public Set<ProductDto> getProducts() {
         LOGGER.info("Get Products called.");
         return productService.getProducts();
     }
 
-    @RequestMapping(value = "/create-product", method = RequestMethod.POST)
+    @PostMapping
     public void createProduct(@Valid @RequestBody ProductDto productDto) {
         LOGGER.info("Create Product: " + productDto);
         productService.create(productDto);
     }
 
-    @RequestMapping(value = "/update-product", method = RequestMethod.PUT)
+    @PutMapping
     public void updateProduct(@Valid @RequestBody ProductDto productDto) throws RelationServiceNotRegisteredException {
         LOGGER.info("Update product: " + productDto);
         productService.update(productDto);
     }
 
-    @RequestMapping(value = "/delete-product", method = RequestMethod.DELETE)
+    @DeleteMapping
     public void deleteProduct(@RequestBody String name) throws RelationServiceNotRegisteredException {
         LOGGER.info("Delete product with name: " + name);
         productService.delete(name);

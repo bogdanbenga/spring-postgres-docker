@@ -23,9 +23,7 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
     @LocalServerPort
     int randomServerPort;
 
-    private String CREATE_URL;
-    private String DELETE_URL;
-    private String UPDATE_URL;
+    private String PRODUCTS_URL;
     private String AUTH_URL;
     private String AUTH_PREFIX = "Bearer";
 
@@ -43,9 +41,7 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
     }
 
     void initUrls() {
-        CREATE_URL = "http://localhost:" + randomServerPort + "/create-product";
-        DELETE_URL = "http://localhost:" + randomServerPort + "/delete-product";
-        UPDATE_URL = "http://localhost:" + randomServerPort + "/update-product";
+        PRODUCTS_URL = "http://localhost:" + randomServerPort + "/products";
         AUTH_URL = "http://localhost:" + randomServerPort + "/authenticate";
     }
 
@@ -72,11 +68,11 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
         headers.add("Authorization", AUTH_PREFIX + " " + TOKEN);
 
         HttpEntity<ProductDto> entity = new HttpEntity<>(productDto, headers);
-        return restTemplate.exchange(UPDATE_URL, HttpMethod.PUT, entity, ProductDto.class);
+        return restTemplate.exchange(PRODUCTS_URL, HttpMethod.PUT, entity, ProductDto.class);
     }
 
     ResponseEntity<String> createProduct(ProductDto productDto) throws URISyntaxException {
-        URI uri = new URI(CREATE_URL);
+        URI uri = new URI(PRODUCTS_URL);
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");
         headers.add("Content-Type", "application/json");
@@ -94,7 +90,7 @@ public abstract class ProductControllerTestHelper extends AbstractJPATest {
         headers.add("Authorization", AUTH_PREFIX + " " + TOKEN);
 
         HttpEntity<String> entity = new HttpEntity<>(productDto.getName(), headers);
-        return restTemplate.exchange(DELETE_URL, HttpMethod.DELETE, entity, String.class);
+        return restTemplate.exchange(PRODUCTS_URL, HttpMethod.DELETE, entity, String.class);
     }
 
 }
