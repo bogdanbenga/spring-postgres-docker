@@ -3,6 +3,7 @@ package com.example.postgres.springpostgresdocker;
 import com.example.postgres.springpostgresdocker.model.Product;
 import com.example.postgres.springpostgresdocker.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,7 @@ public class ProductRepositoryTests extends AbstractJPATest {
     private ProductRepository productRepository;
 
     @Test
-    void contextLoads() {
+    void testSaveAndDelete() {
 
         Product product = new Product();
         product.setCreated(OffsetDateTime.now());
@@ -31,9 +32,12 @@ public class ProductRepositoryTests extends AbstractJPATest {
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<");
         log.info("{}", productRepository);
         log.info("count = {}", productRepository.count());
-        log.info("deleted count = {}", productRepository.deleteByName("Test 123"));
-
+        long deletedCount = productRepository.deleteByName("Test 123");
+        log.info("deleted count = {}", deletedCount);
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+        Assertions.assertEquals(1,deletedCount);
+
     }
 
 }
