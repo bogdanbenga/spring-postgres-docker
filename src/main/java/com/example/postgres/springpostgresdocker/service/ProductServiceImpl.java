@@ -63,13 +63,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public long delete(String name) throws RelationServiceNotRegisteredException {
-        long deletedItemsNo = productRepository.deleteByName(name);
-        if (deletedItemsNo == 0) {
-            throw new RelationServiceNotRegisteredException("Delete failed! The product with name: "
-                    + name
-                    + "does not exist.");
-        }
-        return deletedItemsNo;
+    public void delete(String name) throws RelationServiceNotRegisteredException {
+        productRepository.delete(productRepository.findByName(name).get());
     }
 }

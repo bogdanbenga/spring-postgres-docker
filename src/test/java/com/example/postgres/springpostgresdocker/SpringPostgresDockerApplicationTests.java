@@ -2,9 +2,11 @@ package com.example.postgres.springpostgresdocker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
-class SpringPostgresDockerApplicationTests {
+@Transactional
+class SpringPostgresDockerApplicationTests extends AbstractJPATest{
 
 	@Test
 	void contextLoads() {

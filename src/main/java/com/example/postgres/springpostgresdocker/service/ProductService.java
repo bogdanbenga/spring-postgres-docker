@@ -18,5 +18,5 @@ public interface ProductService {
 
     ProductDto update(ProductDto productDto) throws RelationServiceNotRegisteredException;
 
-    long delete(String name) throws RelationServiceNotRegisteredException;
+    void delete(String name) throws RelationServiceNotRegisteredException;
 }
