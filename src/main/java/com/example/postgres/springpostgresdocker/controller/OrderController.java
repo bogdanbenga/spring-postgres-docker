@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public class OrderController {
     OrderService orderService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public List<OrderDto> getOrders(@RequestParam Date startTime, @RequestParam Date endTime) {
+    public List<OrderDto> getOrders(@RequestParam OffsetDateTime startTime, @RequestParam OffsetDateTime endTime) {
         LOGGER.info("Get Orders from: " + startTime + ", to: " + endTime);
         return orderService.getOrders(startTime, endTime);
     }

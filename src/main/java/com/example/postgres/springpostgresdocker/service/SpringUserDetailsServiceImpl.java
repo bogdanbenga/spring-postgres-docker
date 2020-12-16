@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/**
+ * @author Bogdan Benga <bogdanbenga@gmail.com></>
+ */
 @Service
-public class SpringUserDetailsService implements UserDetailsService {
+public class SpringUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;

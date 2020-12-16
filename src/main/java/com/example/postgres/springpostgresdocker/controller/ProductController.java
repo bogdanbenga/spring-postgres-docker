@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.RelationServiceNotRegisteredException;
 import javax.validation.Valid;
 import java.util.Set;
 
@@ -34,13 +35,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/update-product", method = RequestMethod.PUT)
-    public void updateProduct(@Valid @RequestBody ProductDto productDto) {
+    public void updateProduct(@Valid @RequestBody ProductDto productDto) throws RelationServiceNotRegisteredException {
         LOGGER.info("Update product: " + productDto);
         productService.update(productDto);
     }
 
     @RequestMapping(value = "/delete-product", method = RequestMethod.DELETE)
-    public void deleteProduct(@RequestBody String name) {
+    public void deleteProduct(@RequestBody String name) throws RelationServiceNotRegisteredException {
         LOGGER.info("Delete product with name: " + name);
         productService.delete(name);
     }

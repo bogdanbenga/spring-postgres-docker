@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 /**
@@ -25,9 +24,8 @@ public class CustomerOrder {
     @Column(nullable = false)
     private String email;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date placedTime;
+    private OffsetDateTime placedTime;
 
     @ManyToMany(mappedBy = "orders")
     private Set<Product> products;

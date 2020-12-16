@@ -3,6 +3,7 @@ package com.example.postgres.springpostgresdocker.service;
 
 import com.example.postgres.springpostgresdocker.dto.ProductDto;
 
+import javax.management.relation.RelationServiceNotRegisteredException;
 import java.util.Set;
 
 
@@ -15,7 +16,7 @@ public interface ProductService {
 
     Set<ProductDto> getProducts();
 
-    ProductDto update(ProductDto productDto);
+    ProductDto update(ProductDto productDto) throws RelationServiceNotRegisteredException;
 
-    boolean delete(String name);
+    long delete(String name) throws RelationServiceNotRegisteredException;
 }

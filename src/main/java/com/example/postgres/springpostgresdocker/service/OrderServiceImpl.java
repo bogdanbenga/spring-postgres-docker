@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     CustomerOrderRepository orderRepository;
-    ModelMapper modelMapper = new ModelMapper();
+
+    @Autowired
+    ModelMapper modelMapper;
 
 
     @Override
@@ -34,12 +37,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrders(Date startTime, Date endTime) {
+    public List<OrderDto> getOrders(OffsetDateTime startTime, OffsetDateTime endTime) {
 
-        List<CustomerOrder> orderList = orderRepository.findAll().stream().
-                filter((order) -> order.getPlacedTime().after(startTime) &&
-                        order.getPlacedTime().before(endTime))
-                .collect(Collectors.toList());
+        List<CustomerOrder> orderList = orderRepository
+                .findByPlacedTimeAfterAndPlacedTimeBefore(startTime, endTime);
 
         Type listType = new TypeToken<List<OrderDto>>() {
         }.getType();
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 
     private BigDecimal calculateOrderPrice(Set<Product> products) {
         BigDecimal totalPrice = new BigDecimal("0");
-        for (Product product : products){
+        for (Product product : products) {
             totalPrice = totalPrice.add(product.getPrice());
         }
         return totalPrice;

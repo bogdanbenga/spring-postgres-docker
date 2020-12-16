@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
@@ -29,6 +29,6 @@ public class ProductDto {
     private BigDecimal price;
 
     @NotNull
-    private Date created;
+    private OffsetDateTime created;
 
 }

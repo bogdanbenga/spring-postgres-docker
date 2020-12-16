@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 /**
@@ -27,9 +26,8 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date created;
+    private OffsetDateTime created;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_order",

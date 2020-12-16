@@ -1,23 +1,23 @@
 package com.example.postgres.springpostgresdocker.exception;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
  */
 public class ErrorDetails {
-    private Date dateTime;
+    private OffsetDateTime dateTime;
     private String message;
     private String errorDetails;
 
-    public ErrorDetails(Date dateTime, String message, String errorDetails) {
+    public ErrorDetails(OffsetDateTime dateTime, String message, String errorDetails) {
         super();
         this.dateTime = dateTime;
         this.message = message;
         this.errorDetails = errorDetails;
     }
 
-    public Date getDateTime() {
+    public OffsetDateTime getDateTime() {
         return dateTime;
     }
 

@@ -8,6 +8,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RelationServiceNotRegisteredException;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Optional;
@@ -21,7 +22,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepository productRepository;
-    ModelMapper modelMapper = new ModelMapper();
+
+    @Autowired
+    ModelMapper modelMapper;
 
 
     @Override
@@ -34,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     public Set<ProductDto> getProducts() {
 
         Set<Product> products = new HashSet<>();
-                products.addAll(productRepository.findAll());
+        products.addAll(productRepository.findAll());
         Type listType = new TypeToken<Set<ProductDto>>() {
         }.getType();
 
@@ -42,26 +45,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(ProductDto productDto) {
+    public ProductDto update(ProductDto productDto) throws RelationServiceNotRegisteredException {
 
         Optional<Product> product = productRepository.findByName(productDto.getName());
-        if (product.isPresent()){
+        if (product.isPresent()) {
             Product productToUpdate = product.get();
             productToUpdate.setCreated(productDto.getCreated());
             productToUpdate.setName(productDto.getName());
             productToUpdate.setPrice(productDto.getPrice());
             productRepository.save(productToUpdate);
+        } else {
+            throw new RelationServiceNotRegisteredException("Update failed! The product with name: "
+                    + productDto.getName()
+                    + "does not exist.");
         }
         return productDto;
     }
 
     @Override
-    public boolean delete(String name) {
-        Optional<Product> product = productRepository.findByName(name);
-        if (product.isPresent()) {
-            productRepository.delete(product.get());
-            return true;
+    public long delete(String name) throws RelationServiceNotRegisteredException {
+        long deletedItemsNo = productRepository.deleteByName(name);
+        if (deletedItemsNo == 0) {
+            throw new RelationServiceNotRegisteredException("Delete failed! The product with name: "
+                    + name
+                    + "does not exist.");
         }
-        return false;
+        return deletedItemsNo;
     }
 }

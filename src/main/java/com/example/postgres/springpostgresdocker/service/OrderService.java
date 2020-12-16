@@ -4,7 +4,7 @@ package com.example.postgres.springpostgresdocker.service;
 import com.example.postgres.springpostgresdocker.dto.OrderDto;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -13,7 +13,9 @@ import java.util.List;
 public interface OrderService {
 
     void placeOrder(OrderDto orderDto);
-    List<OrderDto> getOrders(Date startTime, Date endTime);
+
+    List<OrderDto> getOrders(OffsetDateTime startTime, OffsetDateTime endTime);
+
     BigDecimal getOrderPrice(Long id);
 
 }

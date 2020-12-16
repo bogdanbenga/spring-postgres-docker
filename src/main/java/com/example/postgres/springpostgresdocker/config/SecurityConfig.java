@@ -1,7 +1,7 @@
 package com.example.postgres.springpostgresdocker.config;
 
 import com.example.postgres.springpostgresdocker.filter.JwtFilter;
-import com.example.postgres.springpostgresdocker.service.SpringUserDetailsService;
+import com.example.postgres.springpostgresdocker.service.SpringUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SpringUserDetailsService userDetailsService;
+    private SpringUserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private JwtFilter jwtFilter;

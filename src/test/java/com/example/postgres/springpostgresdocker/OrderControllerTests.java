@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Clock;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -47,7 +49,7 @@ class OrderControllerTests {
         ProductDto productDto = new ProductDto();
         productDto.setPrice(new BigDecimal("22.1"));
         productDto.setName("Test-Coca-Cola");
-        productDto.setCreated(new Date());
+        productDto.setCreated(OffsetDateTime.now(Clock.systemDefaultZone()));
 
         ResponseEntity<String> result = createProduct(productDto);
 
@@ -65,7 +67,7 @@ class OrderControllerTests {
         ProductDto productDto = new ProductDto();
         productDto.setPrice(new BigDecimal("22.1"));
         productDto.setName("Test-Coca-Cola");
-        productDto.setCreated(new Date());
+        productDto.setCreated(OffsetDateTime.now(Clock.systemDefaultZone()));
 
         //Create product
         ResponseEntity<String> createResult = createProduct(productDto);

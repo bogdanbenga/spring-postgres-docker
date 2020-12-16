@@ -1,6 +1,6 @@
 package com.example.postgres.springpostgresdocker.filter;
 
-import com.example.postgres.springpostgresdocker.service.SpringUserDetailsService;
+import com.example.postgres.springpostgresdocker.service.SpringUserDetailsServiceImpl;
 import com.example.postgres.springpostgresdocker.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +25,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
-    private SpringUserDetailsService service;
+    private SpringUserDetailsServiceImpl service;
 
 
     @Override
