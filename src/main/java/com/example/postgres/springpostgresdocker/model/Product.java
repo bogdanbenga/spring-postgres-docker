@@ -29,10 +29,4 @@ public class Product {
     @Column(nullable = false)
     private OffsetDateTime created;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_order",
-            joinColumns = { @JoinColumn(name = "product_id",nullable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "order_id", nullable = false) })
-    private Set<CustomerOrder> orders;
-
 }

@@ -1,8 +1,6 @@
 package com.example.postgres.springpostgresdocker.repository;
 
-import com.example.postgres.springpostgresdocker.dto.OrderDto;
 import com.example.postgres.springpostgresdocker.model.CustomerOrder;
-import com.example.postgres.springpostgresdocker.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

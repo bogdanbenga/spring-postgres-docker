@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
@@ -27,7 +28,8 @@ public class CustomerOrder {
     @Column(nullable = false)
     private OffsetDateTime placedTime;
 
-    @ManyToMany(mappedBy = "orders")
-    private Set<Product> products;
+    @ElementCollection
+    @MapKeyColumn
+    private Map<Product, Long> products = new HashMap<Product, Long>();
 
 }

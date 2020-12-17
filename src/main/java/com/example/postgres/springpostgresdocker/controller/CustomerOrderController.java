@@ -1,6 +1,6 @@
 package com.example.postgres.springpostgresdocker.controller;
 
-import com.example.postgres.springpostgresdocker.dto.OrderDto;
+import com.example.postgres.springpostgresdocker.dto.CustomerOrderDto;
 import com.example.postgres.springpostgresdocker.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,23 +16,23 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("customer-orders")
-public class OrderController {
+public class CustomerOrderController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerOrderController.class);
 
     @Autowired
     OrderService orderService;
 
     @GetMapping
-    public List<OrderDto> getOrders(@RequestParam OffsetDateTime startTime, @RequestParam OffsetDateTime endTime) {
+    public List<CustomerOrderDto> getOrders(@RequestParam OffsetDateTime startTime, @RequestParam OffsetDateTime endTime) {
         LOGGER.info("Get Orders from: " + startTime + ", to: " + endTime);
         return orderService.getOrders(startTime, endTime);
     }
 
     @PostMapping
-    public void placeOrder(@Valid @RequestBody OrderDto orderDto) {
-        LOGGER.info("Place Order: " + orderDto);
-        orderService.placeOrder(orderDto);
+    public void placeOrder(@Valid @RequestBody CustomerOrderDto customerOrderDto) {
+        LOGGER.info("Place Order: " + customerOrderDto);
+        orderService.placeOrder(customerOrderDto);
     }
 
     @GetMapping("/price")

@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Bogdan Benga <bogdanbenga@gmail.com></>
@@ -15,12 +16,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
+public class CustomerOrderDto {
 
     private long id;
 
     @NotNull
-    private List<ProductDto> products;
+    private Map<ProductDto, Long> products;
 
     @NotNull
     @Email
